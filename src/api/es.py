@@ -3,7 +3,7 @@ import base64
 
 from elasticsearch import Elasticsearch, RequestError
 
-from esConverter.convertJson4ESindexing import convert_file, convert_to_swagger
+from convertJson4ESindexing import convert_file, convert_to_swagger
 
 
 ES_HOST = 'localhost:9200'
