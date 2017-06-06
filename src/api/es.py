@@ -6,7 +6,7 @@ from elasticsearch import Elasticsearch, RequestError
 from convertJson4ESindexing import convert_file, convert_to_swagger
 
 
-ES_HOST = 'smartapi_elasticSearch_1:9200'
+ES_HOST = '172.23.0.2:9200'
 ES_INDEX_NAME = 'smartapi_swagger'
 ES_DOC_TYPE = 'api'
 
