@@ -10,7 +10,7 @@ import tornado.escape
 from tornado.options import define, options
 from pyld import jsonld
 
-from es import ESQuery
+from api.es import ESQuery
 import config
 
 src_path = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
@@ -65,20 +65,20 @@ class BaseHandler(tornado.web.RequestHandler):
 class JsonHandler(BaseHandler):
     def get(self, ctx_name):
         if ctx_name == 'mygene':
-            obj = get_json(os.path.join(src_path, '../data/mygene.info.smartAPI.json'))
+            obj = get_json(os.path.join(src_path, 'data/mygene.info.smartAPI.json'))
             # del obj['services'][0]['@context']
             obj = jsonld.expand(obj)[0]
             self.return_json(obj)
         elif ctx_name == '2':
-            obj = get_json(os.path.join(src_path, '../data/mygene.info.smartAPI.json'))
+            obj = get_json(os.path.join(src_path, 'data/mygene.info.smartAPI.json'))
             obj = jsonld.expand(obj['services'][0])
             self.return_json(obj)
         elif ctx_name == '3':
-            obj = get_json(os.path.join(src_path, '../data/mygene.info.smartAPI.json'))
+            obj = get_json(os.path.join(src_path, 'data/mygene.info.smartAPI.json'))
             obj = jsonld.expand(obj['services'][0])
             self.return_json(obj)
         if ctx_name == 'myvariant':
-            obj = get_json(os.path.join(src_path, '../data/myvariant.info.smartAPI.json'))
+            obj = get_json(os.path.join(src_path, 'data/myvariant.info.smartAPI.json'))
             # del obj['services'][0]['@context']
             obj = jsonld.expand(obj)[0]
             self.return_json(obj)
@@ -125,7 +125,7 @@ class PathHanlder(BaseHandler):
         if _from and _to:
             # self.write("<b>{}</b>&#x2192;<b>MyVariant.info</b>&#x2192;<b>hgnc.symbol</b>&#x2192;<b>MyGene.info</b>&#x2192;<b>{}</b>".format(_from, _to))
             if _from == 'variant_id' and _to == 'pfam':
-                self.render(os.path.join(src_path, '../website/tools/graph/index.html'))
+                self.render(os.path.join(src_path, 'website/tools/graph/index.html'))
             else:
                 self.write('No proper API path found!')
         else:
